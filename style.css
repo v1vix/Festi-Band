@@ -221,6 +221,15 @@ body {
     line-height: 1.5;  /* Espacio cómodo entre párrafos */
 }
 
+.input-pdf-upload input[type="file"] {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8px;
+    width: 85%;
+    border: 1px dashed rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+}
+
 .input-group input::placeholder {
     color: #ffffff8b; /* Blanco casi puro para que se lea bien */
     font-weight: 500;
@@ -687,4 +696,5 @@ body {
         max-width: 90%;  /* En móviles usa casi todo el ancho disponible */
         font-size: 0.95rem;
     }
+
 }
