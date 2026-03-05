@@ -5,6 +5,9 @@
     <title>Panel Administrativo | Festi-Band</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
 </head>
 <body class="admin-body">
     <nav class="navbar">
@@ -31,6 +34,10 @@
                 <div class="input-desc">
                     <textarea id="admin-desc" placeholder="Descripción de la obra" rows="6"></textarea>
                 </div>
+                <div class="input-pdf-upload">
+                    <label style="color: white; display: block; margin-bottom: 5px; font-size: 0.9rem;">Subir Partitura (PDF):</label>
+                    <input type="file" id="pdf-file" accept=".pdf" style="color: white; margin-bottom: 15px;">
+                </div>
                 <button type="submit" class="btn-primary">Guardar Pieza</button>
             </form>
         </section>
@@ -44,4 +51,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>
