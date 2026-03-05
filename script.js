@@ -37,30 +37,33 @@ let piezasData = {};
 function abrirDetalle(id) {
     const p = piezasData[id];
     const display = document.getElementById('detalle-dinamico');
-
+    
     display.innerHTML = `
         <div class="detalle-info-texto">
             <h2>${p.titulo}</h2>
-            <span class="meta"> Grade ${p.grado} | Autor: ${p.duracion}'</span>
+            <span class="meta"> Grade ${p.grado} | Autor/Arreglista: ${p.duracion}</span>
         </div>
         <div class="detalle-wrapper">
             <div class="detalle-info-visual">
-                <img src="${p.imagen}" alt="Obra">
+                <img src="${p.imagen}" alt="${p.titulo}">
             </div>
             <div class="detalle-info-texto">
                 <p>${p.descripcion}</p>
-                <a href="${p.pdf}" target="_blank" class="click-score">Click to view score →</a>
+                <a href="${p.pdf}" target="_blank" class="click-score">Click para ver partitura (PDF) →</a>
             </div>
         </div>
         <div class="video-full-width">
             <div class="video-wrapper">
-                <iframe src="https://www.youtube.com/embed/${p.youtubeId}" frameborder="0" allowfullscreen></iframe>
+                <iframe 
+                    src="https://www.youtube.com/embed/${p.youtubeId}?rel=0" 
+                    frameborder="0" 
+                    allowfullscreen>
+                </iframe>
             </div>
-        </div>
-    `;
-
+        </div>`;
+    
     document.getElementById('modal-detalle').style.display = "block";
-    document.body.style.overflow = "hidden"; // Bloquea el scroll de atrás
+    document.body.style.overflow = "hidden"; 
 }
 
 function cerrarDetalle() {
@@ -277,38 +280,34 @@ function cerrarDetalle() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Escuchar cambios en la nube en tiempo real
+    // 1. Escuchar cambios en la nube en tiempo real
     db.collection("repertorio").orderBy("fecha", "desc").onSnapshot((snapshot) => {
-        piezasData = {}; // Limpiamos la lista local
+        piezasData = {}; 
         snapshot.forEach(doc => {
-            piezasData[doc.id] = doc.data(); // Llenamos con lo que hay en internet
+            piezasData[doc.id] = doc.data(); 
         });
         
-        // Dibujamos todo de nuevo con los datos nuevos
-        renderAdminList();
-        renderRepertorio();
+        // Ejecutamos los renders si los elementos existen en la página actual
+        if (typeof renderAdminList === 'function') renderAdminList();
+        if (typeof actualizarInterfazRepertorio === 'function') actualizarInterfazRepertorio();
     });
 
-    // Mostrar botón admin si la sesión está activa
+    // 2. Control de botones según sesión
+    const session = localStorage.getItem('festiSession');
     const btnAdmin = document.getElementById('btn-volver-admin');
     const linkAdmin = document.getElementById('admin-link');
-    const session = localStorage.getItem('festiSession');
-    
+    const authBtn = document.getElementById('auth-btn');
+
     if (session === 'admin') {
         if (btnAdmin) btnAdmin.style.display = 'inline-block';
         if (linkAdmin) linkAdmin.style.display = 'inline-block';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-    const authBtn = document.getElementById('auth-btn');
-    const session = localStorage.getItem('festiSession');
-
-    if (authBtn && session === 'admin') {
-        authBtn.innerText = "Panel Admin";
-        authBtn.href = "admin.html";
-        authBtn.style.background = "#d4af37"; // Un toque dorado para resaltar
+        if (authBtn) {
+            authBtn.innerText = "Panel Admin";
+            authBtn.href = "admin.html";
+            authBtn.style.background = "#d4af37";
+        }
     }
 });
-});
+
 
 
