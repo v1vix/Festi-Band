@@ -372,10 +372,12 @@ body {
     max-width: 500px;
     padding: 15px 25px;
     border-radius: 50px;
-    border: 2px solid rgba(70, 118, 169, 0.2);
+    border: 2px solid var(--festi-gold); /* Cambiamos el azul por el dorado */
     font-size: 1rem;
+    font-family: 'Montserrat', sans-serif;
     outline: none;
     transition: 0.3s;
+    background: white;
 }
 .search-box input:focus { border-color: var(--festi-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 /* Menu de Tarjetas */
@@ -403,8 +405,20 @@ body {
 }
 /*Forma tarjeta*/
 .pieza-content { padding: 25px; }
-.pieza-content h3 { margin: 0 0 10px 0; color: var(--festi-blue); }
-.pieza-content p { font-size: 0.9rem; color: #666; line-height: 1.6; height: 60px; overflow: hidden; }
+.pieza-content h3 { 
+    margin: 0 0 10px 0; 
+    color: var(--festi-blue); 
+    font-size: 1.4rem; /* Un poco más grande */
+    font-weight: 700;
+}
+.pieza-content p { 
+    font-size: 1rem; /* Subimos de 0.9 a 1rem */
+    color: #555; 
+    font-weight: 500;
+    line-height: 1.4; 
+    height: auto; /* Quitamos el height fijo para que no se corte el texto */
+    margin-bottom: 10px;
+}
 /*Boton de entrada a tarjeta*/
 .btn-download {
     display: flex;
@@ -467,9 +481,9 @@ body {
 /* Estilos imagen en sí */
 .detalle-wrapper .detalle-info-visual img {
     width: 100%; 
-    height: 222px;
-    object-fit: cover;
-    object-position: center;   
+    max-height: 300px; /* Cambiamos height fijo por max-height */
+    object-fit: contain; /* CAMBIO: 'contain' evita que se corte el texto de la imagen */
+    background-color: #f0f0f0; /* Un fondo neutro por si la imagen es pequeña */
     border-radius: 8px; 
     border: 2px solid #d4af37;
     box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
