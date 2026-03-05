@@ -1,0 +1,690 @@
+/* --- 1. VARIABLES Y ESTILOS BASE (MANTENIENDO TU DISEÑO) --- */
+:root {
+    --festi-blue: #4676a9;
+    --festi-dark: #1b365d;
+    --festi-gold: #c5a059;
+    --bg-light: #f4f7f9;
+    --white: #ffffff;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7f9;
+    color: var(--festi-dark);
+}
+
+/* --- 2. TU NAVBAR ORIGINAL --- */
+    .navbar {
+        background: var(--festi-dark);
+        padding: 15px 8%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: white;
+    }
+
+    .logo-img {
+    height: 80px;       /* Ajusta la altura a tu gusto */
+    width: auto;        /* Mantiene la proporción */
+    display: block;
+    transition: transform 0.3s ease;
+    }
+
+    .logo-img:hover {
+        transform: scale(1.05); /* Efecto sutil al pasar el mouse */
+    }
+
+    /* Ajuste para que el logo no pegue con los links en móvil */
+    .navbar {
+        align-items: center; 
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .nav-links a {
+        color: white;
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .btn-login {
+        border: 2px solid var(--festi-gold);
+        padding: 8px 15px;
+        border-radius: 5px;
+        color: var(--festi-gold) !important;
+    }
+
+/* --- 3. TU HERO ORIGINAL (LO QUE SE HABÍA DAÑADO) --- */
+.hero {
+    height: 80vh;
+    background: linear-gradient(rgba(27,54,93,0.7), rgba(27,54,93,0.7)), url('img/fondo2.webp');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-content h1 { font-size: 3rem; font-weight: 900; margin-bottom: 60px; }
+.tag { margin-top: 200px; background: var(--festi-gold); color: var(--festi-dark); padding: 5px 15px; border-radius: 50px; font-weight: 800; font-size: 0.8rem; }
+.hero-content p {
+    margin-bottom: 0px; /* Esto también ayuda a separar los botones del texto */
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    font-weight: 300px;
+}
+
+.cta-group { display: flex; gap: 15px; justify-content: center; margin-top: 60px; }
+.btn-primary { background: var(--festi-gold); color: var(--festi-dark); padding: 12px 25px; text-decoration: none; font-weight: 700; border-radius: 5px; border: none; }
+.btn-primary:hover { background: #e2c07d; color: #527db9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);}
+.btn-outline { border: 2px solid white; color: white; padding: 12px 25px; text-decoration: none; font-weight: 700; border-radius: 5px; }
+
+/* --- 4. SECCIONES DE INFORMACIÓN Y ACADEMIA --- */
+.info-section { padding: 60px 8%; background: white; text-align: center; }
+.contacto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));}
+.card {color: #ffffff; background: var(--festi-dark); padding: 30px; text-align: center; }
+.card.highlight { background: var(--festi-dark); color: white; }
+
+
+/* LOGIN *//* --- 4. LOGIN ESTÉTICO (Encapsulado) --- */
+/* Estilos específicos para la página de Login */
+.login-body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #1b375d57 0%, #4676a936 100%), url('img/fondo.avif');;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+}
+
+.glass-login-card {
+    background: rgba(255, 255, 255, 0.1); /* Efecto cristal */
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding: 40px;
+    border-radius: 20px;
+    border: 1px solid rgba(203, 150, 52, 0.431); /* Borde dorado suave */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 350px;
+    color: white;
+}
+/* --- CORRECCIÓN DEFINITIVA DE TAMAÑO PARA EL LOGO EN EL LOGIN --- */
+
+/* 1. Contenedor del logo */
+.login-logo {
+    margin-bottom: 20px; /* Espacio inferior */
+    display: flex;       /* Activamos flexbox */
+    justify-content: center; /* Centrado horizontal */
+    align-items: center;     /* Centrado vertical */
+    width: 90%;         /* Ocupa todo el ancho de la tarjeta */
+}
+
+/* 2. La imagen del logo dentro del login */
+.login-logo img {
+    /* --- EL AJUSTE IMPORTANTE ESTÁ AQUÍ --- */
+    max-width: 40px;      
+    height: auto;       
+    
+    /* Efecto opcional de sombra para que resalte un poco más */
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); 
+    
+    /* Animación suave para cuando pases el mouse */
+    transition: transform 0.4s ease;
+}
+
+/* 3. Efecto al pasar el mouse por la tarjeta */
+.glass-login-card:hover .login-logo img {
+    transform: scale(1.03); /* Se agranda un poquito, muy sutil */
+}
+
+/* 4. Ajuste adicional para dispositivos móviles muy pequeños (menor a 480px) */
+@media (max-width: 480px) {
+    .login-logo img {
+        max-width: 90px; /* Un poco más pequeño en móviles */
+    }
+}
+
+.input-group input {
+    width: 85%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.646);
+    border-radius: 10px;
+    color: var(--festi-dark);
+    font-size: 1rem;
+    font-weight: 300; /* Texto un poco más grueso */
+    outline: none;
+    transition: 0.3s;
+}
+.input-grou2 input {
+    width: 85%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(43 48 84 / 36%);
+    border-radius: 10px;
+    color: var(--festi-dark);
+    font-size: 1rem;
+    font-weight: 300; /* Texto un poco más grueso */
+    outline: none;
+    transition: 0.3s;
+}
+
+.inputboxad input{
+    width: 85%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(43 48 84 / 36%);
+    border-radius: 10px;
+    color: var(--festi-dark);
+    font-size: 1rem;
+    font-weight: 300; /* Texto un poco más grueso */
+    outline: none;
+    transition: 0.3s;
+}
+
+/* Seleccionamos el textarea específicamente */
+.input-desc textarea {
+    width: 85%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    background: rgba(255, 255, 255, 0.05); /* Mantén el fondo que usas */
+    border: 1px solid rgba(0, 0, 0, 0.2); /* O el color de borde que tengas */
+    border-radius: 10px;
+    color: var(--festi-dark);
+    font-family: 'Montserrat', sans-serif; /* Importante para que la letra no cambie */
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+    /* Propiedades clave para cuadros de párrafo */
+    min-height: 150px; /* Altura inicial grande */
+    resize: vertical;  /* Permite al usuario agrandarlo solo hacia abajo */
+    line-height: 1.5;  /* Espacio cómodo entre párrafos */
+}
+
+.input-group input::placeholder {
+    color: #ffffff8b; /* Blanco casi puro para que se lea bien */
+    font-weight: 500;
+}
+
+.input-grou2 input::placeholder {
+    color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
+    font-weight: 500;
+}
+
+.inputboxad input::placeholder{
+    color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
+    font-weight: 500;
+}
+
+.input-desc input::placeholder{
+    color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
+    font-weight: 500;
+}
+
+.input-group input:focus {
+    border-color: #c5a059;
+    background: rgba(255, 255, 255, 0.1);
+}
+.input-grou2 input:focus {
+    border-color: #c5a059;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.inputboxad input:focus {
+    border-color: #c5a059;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.input-desc textarea:focus {
+    border-color: #c5a059;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-glass {
+    width: 95%;
+    padding: 12px;
+    background: #c5a059;
+    color: #1b365d;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-glass:hover {
+    background: #e2c07d;
+    color: #527db9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+}
+
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.832);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.back-link:hover {
+    color: #ffc355f6;
+}
+
+/* --- 5. ESTILOS PARA EL MODAL DE REPERTORIO --- */
+
+body {
+    margin: 0;
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-light);
+    color: var(--festi-dark);
+}
+
+/* Navbar */
+.navbar {
+    background: var(--festi-blue);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.logo { font-weight: 900; font-size: 1.5rem; }
+.logo span { color: var(--festi-gold); }
+
+.btn-edit {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid white;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    font-weight: 300; 
+    font-family: 'Montserrat';
+}
+
+.btn-edit:hover { background: white; color: var(--festi-blue); }
+
+.btn-logout {
+    background: rgba(255,255,255,0.2);
+    border: 1px solid white;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 1rem;
+    font-weight: 300; 
+    font-family: 'Montserrat';
+}
+
+.btn-logout:hover { background: white; color: var(--festi-blue); }
+
+/* Contenedor Principal */
+.repertorio-container {
+    padding: 50px 8%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.repertorio-header { text-align: center; margin-bottom: 50px; }
+.repertorio-header h1 { font-size: 3rem; margin-bottom: 10px; }
+.gold-text { color: var(--festi-gold); }
+
+/* Buscador */
+.search-box {
+    margin-top: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    max-width: 500px;
+    padding: 15px 25px;
+    border-radius: 50px;
+    border: 2px solid rgba(70, 118, 169, 0.2);
+    font-size: 1rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.search-box input:focus { border-color: var(--festi-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+/* Grid de Tarjetas */
+.repertorio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.pieza-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border-bottom: 4px solid transparent;
+}
+
+.pieza-card:hover {
+    transform: translateY(-10px);
+    border-bottom: 4px solid var(--festi-gold);
+    box-shadow: 0 15px 35px rgba(70, 118, 169, 0.2);
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #000;
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
+
+.pieza-content { padding: 25px; }
+.pieza-content h3 { margin: 0 0 10px 0; color: var(--festi-blue); }
+.pieza-content p { font-size: 0.9rem; color: #666; line-height: 1.6; height: 60px; overflow: hidden; }
+
+.btn-download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: var(--festi-dark);
+    color: white;
+    text-decoration: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: 0.3s;
+    margin-top: 15px;
+}
+
+.btn-download:hover { background: var(--festi-gold); color: var(--festi-dark); }
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 3000; 
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(27, 54, 93, 0.9); /* Azul con transparencia */
+    backdrop-filter: blur(8px);
+    overflow-y: auto;
+}
+
+.modal-content {
+    background-color: #ffffff;
+    margin: 5% auto;
+    padding: 40px;
+    width: 85%;
+    max-width: 1100px;
+    border-radius: 15px;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+
+.close-btn {
+    position: absolute; right: 20px; top: 10px;
+    font-size: 40px; cursor: pointer; color: var(--festi-blue);
+}
+
+/* Estructura interna del detalle (Igual a tu imagen) */
+.detalle-wrapper { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
+
+.detalle-info-visual { flex: 1; min-width: 300px; }
+.detalle-info-visual img { width: 100%; border-radius: 8px; border: 4px solid var(--festi-blue); }
+
+.detalle-info-texto { flex: 1.2; min-width: 300px; }
+.detalle-info-texto h2 { font-size: 2.2rem; color: var(--festi-dark); margin-bottom: 5px; }
+.detalle-info-texto .meta { color: var(--festi-gold); font-weight: bold; margin-bottom: 15px; display: block; }
+.detalle-info-texto p { line-height: 1.7; text-align: justify; color: #444; }
+
+.click-score { 
+    display: inline-block; margin: 20px 0; font-size: 1.3rem; 
+    font-weight: 700; color: var(--festi-blue); text-decoration: none; 
+}
+.click-score:hover { color: var(--festi-gold); }
+
+/* Video debajo del contenido */
+.video-full-width { margin-top: 30px; border-radius: 12px; overflow: hidden; }
+
+/* Preview de las tarjetas en la lista */
+.video-preview-img {
+    height: 200px; background-size: cover; background-position: center;
+    position: relative; cursor: pointer;
+}
+.play-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4); display: flex; align-items: center;
+    justify-content: center; color: white; opacity: 0; transition: 0.3s;
+    font-weight: bold;
+}
+.pieza-card:hover .play-overlay { opacity: 1; }
+
+/* --- 6. ESTILOS PARA EL PANEL ADMIN (AÑADIDOS SIN DAÑAR LO ANTERIOR) --- */
+.admin-container { padding: 100px 8%; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.admin-card { background: rgb(255, 255, 255); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+.input-group { display: flex; gap: 10px; margin-bottom: 10px; }
+.input-grou2
+ { display: flex; gap: 10px; margin-bottom: 10px; }
+.admin-item { 
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    display: flex; justify-content: space-between; background: white; 
+    padding: 15px; margin-bottom: 10px; border-radius: 10px; align-items: center;
+}
+.admin-item button { margin-left: 5px; padding: 5px 10px; cursor: pointer; border: none; border-radius: 5px; background: var(--festi-blue); color: white; }
+
+/* REPERTORIO GRID */
+.repertorio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 20px 0; }
+
+/* Contenedor principal del dropdown */
+.dropdown {
+    position: relative; /* Necesario para posicionar el submenú */
+}
+
+/* Estilo del submenú (Oculto por defecto) */
+.submenu {
+    display: none;
+    position: absolute;
+    top: 150%; /* Aparece justo debajo del enlace principal */
+    left: 0;
+    background-color: var(--festi-dark); /* Mismo azul de tu navbar */
+    min-width: 180px;
+    list-style: none;
+    padding: 10px 0;
+    border-radius: 0 0 10px 10px;
+    border-top: 3px solid var(--festi-gold); /* Detalle dorado arriba */
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+/* Estilo de los enlaces dentro del mini menú */
+.submenu li a {
+    padding: 10px 20px;
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: white;
+    transition: 0.3s;
+}
+
+/* Efecto al pasar el mouse sobre las opciones del mini menú */
+.submenu li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--festi-gold);
+}
+
+/* LA MAGIA: Mostrar el submenú cuando el mouse entra a .dropdown */
+.dropdown:hover .submenu {
+    display: block;
+    animation: fadeIn 0.3s ease; /* Animación opcional */
+}
+
+.submenu::before {
+    content: "";
+    position: absolute;
+    top: -20px; /* Crea un área invisible de 20px hacia arriba */
+    left: 0;
+    width: 100%;
+    height: 20px;
+}
+
+/* Animación de entrada suave */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* --- SECCIÓN DE SERVICIOS (COLUMNAS) --- */
+.servicios-grid {
+    display: flex; /* Alinea las columnas una al lado de la otra */
+    width: 100%;
+    min-height: 400px;
+    flex-wrap: wrap; /* Para que en móviles se pongan una debajo de otra */
+}
+
+.columna {
+    flex: 1; /* Hace que todas las columnas midan lo mismo */
+    min-width: 250px;
+    padding: 60px 40px;
+    text-align: center;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+}
+
+/* Colores de Fondo según la imagen */
+.fundacion { background-color: #103350; } /* Azul muy oscuro */
+.festivales { background-color: #2c5697; } /* Azul medio */
+.academia-col { background-color: #e9ecef; color: #1b365d; } /* Gris claro (texto oscuro) */
+.orquesta { background-color: #72a8d1; } /* Azul claro */
+
+/* Estilos de texto internos */
+.columna h3 {
+    font-size: 1.4rem;
+    font-weight: 900;
+    margin: 20px 0;
+    letter-spacing: 2px;
+}
+
+.columna p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+    max-width: 200px;
+}
+
+.columna a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+.columna a:hover {
+    text-decoration: underline;
+}
+
+/* Efecto opcional: resalta un poco al pasar el mouse */
+.columna:hover {
+    filter: brightness(1.2);
+}
+
+/* --- SECCIÓN QUÉ HACEMOS (FONDO OSCURO) --- */
+.que-hacemos {
+    background-color: #ffffff; /* Fondo gris oscuro/negro */
+    padding: 80px 8%;
+    text-align: center;
+    color: #01041a;
+}
+
+.que-hacemos h2 {
+    font-size: 2.5rem;
+    margin-bottom: 50px;
+    font-weight: 700;
+}
+
+.hacemos-container {
+    display: flex;
+    justify-content: space-around;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.hacemos-item {
+    flex: 1;
+    min-width: 250px;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* El Círculo Azul */
+.circulo-icono {
+    width: 120px;
+    height: 120px;
+    background-color: #3a8fb7; /* Azul celeste de la imagen */
+    border-radius: 50%;       /* Lo hace círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    transition: transform 0.3s ease;
+}
+
+.circulo-icono img {
+    width: 65px; /* Ajusta según el tamaño de tus iconos */
+    height: auto;
+}
+
+.hacemos-item p {
+    font-size: 1.3rem;
+    line-height: 1.6;
+    color: #01041a;
+    font-weight: 300;
+}
+
+/* Ajuste para móviles */
+@media (max-width: 768px) {
+    .que-hacemos h2 { font-size: 2rem; }
+    .hacemos-container { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 768px) {
+    .hero-content p {
+        max-width: 90%;  /* En móviles usa casi todo el ancho disponible */
+        font-size: 0.95rem;
+    }
+}
