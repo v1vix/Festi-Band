@@ -261,7 +261,6 @@ function abrirDetalle(id) {
                 <a href="${p.pdf}" target="_blank" class="click-score">Click to view score →</a>
             </div>
         </div>
-        // Dentro de abrirDetalle(id)
             <div class="video-full-width">
                 <div class="video-wrapper">
                     <iframe 
@@ -308,6 +307,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
 
 
 
