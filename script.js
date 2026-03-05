@@ -294,4 +294,16 @@ document.addEventListener('DOMContentLoaded', () => {
         if (btnAdmin) btnAdmin.style.display = 'inline-block';
         if (linkAdmin) linkAdmin.style.display = 'inline-block';
     }
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const authBtn = document.getElementById('auth-btn');
+    const session = localStorage.getItem('festiSession');
+
+    if (authBtn && session === 'admin') {
+        authBtn.innerText = "Panel Admin";
+        authBtn.href = "admin.html";
+        authBtn.style.background = "#d4af37"; // Un toque dorado para resaltar
+    }
 });
+});
+
