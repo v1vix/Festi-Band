@@ -1,4 +1,4 @@
-/* --- 1. VARIABLES Y ESTILOS BASE (MANTENIENDO TU DISEÑO) --- */
+/* --- VARIABLES Y ESTILOS BASE --- */
 :root {
     --festi-blue: #4676a9;
     --festi-dark: #1b365d;
@@ -6,7 +6,6 @@
     --bg-light: #f4f7f9;
     --white: #ffffff;
 }
-
 body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
@@ -15,53 +14,53 @@ body {
     color: var(--festi-dark);
 }
 
-/* --- 2. TU NAVBAR ORIGINAL --- */
-    .navbar {
-        background: var(--festi-dark);
-        padding: 15px 8%;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: white;
-    }
 
+/* --- BARRA DE NAVEGACION HOME --- */
+/* #region */
+.navbar {
+    background: var(--festi-blue);
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
     .logo-img {
     height: 80px;       /* Ajusta la altura a tu gusto */
     width: auto;        /* Mantiene la proporción */
     display: block;
     transition: transform 0.3s ease;
     }
-
     .logo-img:hover {
         transform: scale(1.05); /* Efecto sutil al pasar el mouse */
     }
-
     /* Ajuste para que el logo no pegue con los links en móvil */
     .navbar {
         align-items: center; 
     }
-
     .nav-links {
         display: flex;
         list-style: none;
         gap: 20px;
         align-items: center;
     }
-
     .nav-links a {
         color: white;
         text-decoration: none;
         font-weight: 600;
     }
-
     .btn-login {
         border: 2px solid var(--festi-gold);
         padding: 8px 15px;
         border-radius: 5px;
         color: var(--festi-gold) !important;
     }
+/* #endregion */
 
-/* --- 3. TU HERO ORIGINAL (LO QUE SE HABÍA DAÑADO) --- */
+/* --- HOME  --- */
+/* #region */
+/*Fondo de inicio*/
 .hero {
     height: 80vh;
     background: linear-gradient(rgba(27,54,93,0.7), rgba(27,54,93,0.7)), url('img/fondo2.webp');
@@ -73,32 +72,74 @@ body {
     color: white;
     text-align: center;
 }
-
-.hero-content h1 { font-size: 3rem; font-weight: 900; margin-bottom: 60px; }
-.tag { margin-top: 200px; background: var(--festi-gold); color: var(--festi-dark); padding: 5px 15px; border-radius: 50px; font-weight: 800; font-size: 0.8rem; }
+.hero-content h1 { 
+    font-size: 3rem; 
+    font-weight: 900; 
+    margin-bottom: 60px; 
+}
+/*Quienes somos*/
+.tag { margin-top: 200px; 
+    background: var(--festi-gold); 
+    color: var(--festi-dark); 
+    padding: 5px 15px; 
+    border-radius: 50px; 
+    font-weight: 800; 
+    font-size: 0.8rem; 
+}
 .hero-content p {
-    margin-bottom: 0px; /* Esto también ayuda a separar los botones del texto */
+    margin-bottom: 0px;
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 20px;
     font-weight: 300px;
 }
+/*Botones*/
+.cta-group { 
+    display: flex; 
+    gap: 15px; 
+    justify-content: center; 
+    margin-top: 60px; 
+}
+.btn-primary { 
+    background: var(--festi-gold); 
+    color: var(--festi-dark); 
+    padding: 12px 25px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    border-radius: 5px; 
+    border: none; 
+}
+.btn-primary:hover { background: #e2c07d; 
+    color: #527db9; 
+    transform: translateY(-2px); 
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+}
+.btn-outline { border: 2px solid white; 
+    color: white; 
+    padding: 12px 25px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    border-radius: 5px; 
+}
+/* --- SECCIONES DE INFORMACIÓN Y CONTACTO --- */
+.contacto-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.card {
+    color: #ffffff; 
+    background: var(--festi-dark); 
+    padding: 30px; 
+    text-align: center; 
+}
+.card.highlight { 
+    background: var(--festi-dark); 
+    color: white; }
+/* #endregion */
 
-.cta-group { display: flex; gap: 15px; justify-content: center; margin-top: 60px; }
-.btn-primary { background: var(--festi-gold); color: var(--festi-dark); padding: 12px 25px; text-decoration: none; font-weight: 700; border-radius: 5px; border: none; }
-.btn-primary:hover { background: #e2c07d; color: #527db9; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);}
-.btn-outline { border: 2px solid white; color: white; padding: 12px 25px; text-decoration: none; font-weight: 700; border-radius: 5px; }
-
-/* --- 4. SECCIONES DE INFORMACIÓN Y ACADEMIA --- */
-.info-section { padding: 60px 8%; background: white; text-align: center; }
-.contacto-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));}
-.card {color: #ffffff; background: var(--festi-dark); padding: 30px; text-align: center; }
-.card.highlight { background: var(--festi-dark); color: white; }
-
-
-/* LOGIN *//* --- 4. LOGIN ESTÉTICO (Encapsulado) --- */
-/* Estilos específicos para la página de Login */
+/* --- SECCION LOGIN --- */
+/* #region */
 .login-body {
     height: 100vh;
     display: flex;
@@ -111,7 +152,6 @@ body {
     background-attachment: fixed;
     margin: 0;
 }
-
 .glass-login-card {
     background: rgba(255, 255, 255, 0.1); /* Efecto cristal */
     backdrop-filter: blur(15px);
@@ -125,42 +165,22 @@ body {
     max-width: 350px;
     color: white;
 }
-/* --- CORRECCIÓN DEFINITIVA DE TAMAÑO PARA EL LOGO EN EL LOGIN --- */
-
 /* 1. Contenedor del logo */
 .login-logo {
-    margin-bottom: 20px; /* Espacio inferior */
-    display: flex;       /* Activamos flexbox */
-    justify-content: center; /* Centrado horizontal */
-    align-items: center;     /* Centrado vertical */
-    width: 90%;         /* Ocupa todo el ancho de la tarjeta */
+    margin-bottom: 20px; 
+    display: flex;       
+    justify-content: center; 
+    align-items: center;     
+    width: 90%;         
 }
-
 /* 2. La imagen del logo dentro del login */
 .login-logo img {
-    /* --- EL AJUSTE IMPORTANTE ESTÁ AQUÍ --- */
     max-width: 40px;      
     height: auto;       
-    
-    /* Efecto opcional de sombra para que resalte un poco más */
     filter: drop-shadow(0 5px 15px rgba(0,0,0,0.2)); 
-    
-    /* Animación suave para cuando pases el mouse */
     transition: transform 0.4s ease;
 }
-
-/* 3. Efecto al pasar el mouse por la tarjeta */
-.glass-login-card:hover .login-logo img {
-    transform: scale(1.03); /* Se agranda un poquito, muy sutil */
-}
-
-/* 4. Ajuste adicional para dispositivos móviles muy pequeños (menor a 480px) */
-@media (max-width: 480px) {
-    .login-logo img {
-        max-width: 90px; /* Un poco más pequeño en móviles */
-    }
-}
-
+/*Entrada de usuario y contrasena*/
 .input-group input {
     width: 85%;
     padding: 12px 15px;
@@ -170,10 +190,44 @@ body {
     border-radius: 10px;
     color: var(--festi-dark);
     font-size: 1rem;
-    font-weight: 300; /* Texto un poco más grueso */
+    font-weight: 300;
     outline: none;
     transition: 0.3s;
 }
+.input-group input::placeholder {
+    color: #ffffff8b;
+    font-weight: 500;
+}
+.input-group input:focus {
+    border-color: #c5a059;
+    background: rgba(255, 255, 255, 0.1);
+}
+.glass-login-card:hover .login-logo img {
+    transform: scale(1.03);
+}
+/*Volver al inicio*/
+.back-link {
+    display: block;
+    margin-top: 20px;
+    color: rgba(255, 255, 255, 0.832);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+.back-link:hover {
+    color: #ffc355f6;
+}
+
+/* 4. Ajuste dispositivos móviles muy pequeños (menor a 480px) */
+@media (max-width: 480px) {
+    .login-logo img {
+        max-width: 90px; /* Un poco más pequeño en móviles */
+    }
+}
+/* #endregion */
+
+/* --- ADMIN SECCION ---*/
+/* #region */
 .input-grou2 input {
     width: 85%;
     padding: 12px 15px;
@@ -187,8 +241,16 @@ body {
     outline: none;
     transition: 0.3s;
 }
+.input-grou2 input::placeholder {
+    color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
+    font-weight: 500;
+}
+.input-grou2 input:focus {
+    border-color: #c5a059;
+    background: rgba(255, 255, 255, 0.1);
+}
 
-.inputboxad input{
+.input-port input{
     width: 85%;
     padding: 12px 15px;
     margin-bottom: 15px;
@@ -201,8 +263,15 @@ body {
     outline: none;
     transition: 0.3s;
 }
+.input-port input::placeholder{
+    color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
+    font-weight: 500;
+}
+.input-port input:focus {
+    border-color: #c5a059;
+    background: rgba(255, 255, 255, 0.1);
+}
 
-/* Seleccionamos el textarea específicamente */
 .input-desc textarea {
     width: 85%;
     padding: 12px 15px;
@@ -220,55 +289,15 @@ body {
     resize: vertical;  /* Permite al usuario agrandarlo solo hacia abajo */
     line-height: 1.5;  /* Espacio cómodo entre párrafos */
 }
-
-.input-pdf-upload input[type="file"] {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 10px;
-    border-radius: 8px;
-    width: 85%;
-    border: 1px dashed rgba(255, 255, 255, 0.3);
-    cursor: pointer;
-}
-
-.input-group input::placeholder {
-    color: #ffffff8b; /* Blanco casi puro para que se lea bien */
-    font-weight: 500;
-}
-
-.input-grou2 input::placeholder {
-    color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
-    font-weight: 500;
-}
-
-.inputboxad input::placeholder{
-    color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
-    font-weight: 500;
-}
-
 .input-desc input::placeholder{
     color: #0f0e0e8b; /* Blanco casi puro para que se lea bien */
     font-weight: 500;
 }
-
-.input-group input:focus {
-    border-color: #c5a059;
-    background: rgba(255, 255, 255, 0.1);
-}
-.input-grou2 input:focus {
-    border-color: #c5a059;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.inputboxad input:focus {
-    border-color: #c5a059;
-    background: rgba(255, 255, 255, 0.1);
-}
-
 .input-desc textarea:focus {
     border-color: #c5a059;
     background: rgba(255, 255, 255, 0.1);
 }
-
+/*Boton de guardar*/
 .btn-glass {
     width: 95%;
     padding: 12px;
@@ -282,52 +311,26 @@ body {
     text-transform: uppercase;
     letter-spacing: 1px;
 }
-
 .btn-glass:hover {
     background: #e2c07d;
     color: #527db9;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
 }
+/* #endregion */
 
-.back-link {
-    display: block;
-    margin-top: 20px;
-    color: rgba(255, 255, 255, 0.832);
-    text-decoration: none;
-    font-size: 0.8rem;
-    transition: 0.3s;
+/* --- MODAL DE REPERTORIO --- */
+/* #region */ /*TODO*/
+/* 1. REPERTORIO HOME */
+/* #region */
+
+.logo { 
+    font-weight: 900; 
+    font-size: 1.5rem; 
 }
-
-.back-link:hover {
-    color: #ffc355f6;
-}
-
-/* --- 5. ESTILOS PARA EL MODAL DE REPERTORIO --- */
-
-body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background-color: var(--bg-light);
-    color: var(--festi-dark);
-}
-
-/* Navbar */
-.navbar {
-    background: var(--festi-blue);
-    padding: 15px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
-
-.logo { font-weight: 900; font-size: 1.5rem; }
 .logo span { color: var(--festi-gold); }
-
 .btn-edit {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.085);
     border: 1px solid white;
     color: white;
     padding: 8px 15px;
@@ -336,13 +339,10 @@ body {
     transition: 0.3s;
     font-size: 1rem;
     font-weight: 300; 
-    font-family: 'Montserrat';
 }
-
-.btn-edit:hover { background: white; color: var(--festi-blue); }
-
+.btn-edit:hover { background: white; border: 1px var(--festi-gold); color: var(--festi-blue); }
 .btn-logout {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.085);
     border: 1px solid white;
     color: white;
     padding: 8px 15px;
@@ -351,27 +351,22 @@ body {
     transition: 0.3s;
     font-size: 1rem;
     font-weight: 300; 
-    font-family: 'Montserrat';
+    text-decoration: none;
 }
-
-.btn-logout:hover { background: white; color: var(--festi-blue); }
-
+.btn-logout:hover { background: white; border: 1px var(--festi-gold); color: var(--festi-blue); }
 /* Contenedor Principal */
 .repertorio-container {
     padding: 50px 8%;
     max-width: 1200px;
     margin: auto;
 }
-
 .repertorio-header { text-align: center; margin-bottom: 50px; }
 .repertorio-header h1 { font-size: 3rem; margin-bottom: 10px; }
 .gold-text { color: var(--festi-gold); }
-
 /* Buscador */
 .search-box {
     margin-top: 25px;
 }
-
 .search-box input {
     width: 100%;
     max-width: 500px;
@@ -382,16 +377,17 @@ body {
     outline: none;
     transition: 0.3s;
 }
-
 .search-box input:focus { border-color: var(--festi-blue); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-
-/* Grid de Tarjetas */
+/* Menu de Tarjetas */
 .repertorio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
 }
+/* #endregion */
 
+/* 2. TARJETA */
+/* #region */
 .pieza-card {
     background: var(--white);
     border-radius: 20px;
@@ -400,29 +396,16 @@ body {
     transition: 0.3s;
     border-bottom: 4px solid transparent;
 }
-
 .pieza-card:hover {
     transform: translateY(-10px);
     border-bottom: 4px solid var(--festi-gold);
     box-shadow: 0 15px 35px rgba(70, 118, 169, 0.2);
 }
-
-.video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    background: #000;
-}
-
-.video-wrapper iframe {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-}
-
+/*Forma tarjeta*/
 .pieza-content { padding: 25px; }
 .pieza-content h3 { margin: 0 0 10px 0; color: var(--festi-blue); }
 .pieza-content p { font-size: 0.9rem; color: #666; line-height: 1.6; height: 60px; overflow: hidden; }
-
+/*Boton de entrada a tarjeta*/
 .btn-download {
     display: flex;
     align-items: center;
@@ -437,7 +420,6 @@ body {
     transition: 0.3s;
     margin-top: 15px;
 }
-
 .btn-download:hover { background: var(--festi-gold); color: var(--festi-dark); }
 .modal {
     display: none; 
@@ -450,6 +432,7 @@ body {
     overflow-y: auto;
 }
 
+/*Forma de tarjeta interior*/
 .modal-content {
     background-color: #ffffff;
     margin: 5% auto;
@@ -460,31 +443,93 @@ body {
     position: relative;
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
 }
-
 .close-btn {
     position: absolute; right: 20px; top: 10px;
     font-size: 40px; cursor: pointer; color: var(--festi-blue);
 }
-
-/* Estructura interna del detalle (Igual a tu imagen) */
-.detalle-wrapper { display: flex; gap: 30px; flex-wrap: wrap; margin-top: 20px; }
-
-.detalle-info-visual { flex: 1; min-width: 300px; }
-.detalle-info-visual img { width: 100%; border-radius: 8px; border: 4px solid var(--festi-blue); }
-
-.detalle-info-texto { flex: 1.2; min-width: 300px; }
-.detalle-info-texto h2 { font-size: 2.2rem; color: var(--festi-dark); margin-bottom: 5px; }
-.detalle-info-texto .meta { color: var(--festi-gold); font-weight: bold; margin-bottom: 15px; display: block; }
-.detalle-info-texto p { line-height: 1.7; text-align: justify; color: #444; }
-
-.click-score { 
-    display: inline-block; margin: 20px 0; font-size: 1.3rem; 
-    font-weight: 700; color: var(--festi-blue); text-decoration: none; 
+/* Estructura interna del detalle */
+/* Parrafo */
+.detalle-wrapper { 
+    display: flex; 
+    gap: 25px; 
+    align-items: flex-start; 
+    margin-top: 15px; 
 }
-.click-score:hover { color: var(--festi-gold); }
-
+/*Imagen*/
+/* Contenedor*/
+.detalle-wrapper .detalle-info-visual {
+    flex-shrink: 0;
+    width: 400px;  
+    display: flex; 
+    line-height: 1.6;
+    justify-content: center;
+}
+/* Estilos imagen en sí */
+.detalle-wrapper .detalle-info-visual img {
+    width: 100%; 
+    height: 222px;
+    object-fit: cover;
+    object-position: center;   
+    border-radius: 8px; 
+    border: 2px solid #d4af37;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
+}
+/* Ajuste para pantallas pequeñas (móviles) */
+@media (max-width: 600px) {
+    .detalle-wrapper .detalle-info-visual {
+        width: 100%; /* En móvil, que ocupe todo el ancho */
+        margin-bottom: 15px; /* Separa de la descripción */
+    }
+}
+.detalle-info-texto { 
+    flex: 1.2; 
+    min-width: 300px; 
+}
+.detalle-info-texto h2 { 
+    font-size: 2.6rem; 
+    color: var(--festi-dark); 
+    margin-bottom: 5px;
+    margin-top: 10px; 
+}
+.detalle-info-texto .meta { color: var(--festi-gold); 
+    font-weight: bold; 
+    margin-bottom: 20px; 
+    display: block; 
+}
+.detalle-info-texto p { 
+    line-height: 1.7; 
+    text-align: justify; 
+    color: var(--festi-dark); 
+}
+.click-score { 
+    display: inline-block; 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: var(--festi-dark); 
+    text-decoration: none;
+    padding: 6px 10px;
+    margin-bottom: 15px;
+    background: var(--festi-gold);
+    border: 1px solid rgba(255, 255, 255, 0.646);
+    border-radius: 10px;
+    outline: none;
+    transition: 0.3s;
+    
+}
+.click-score:hover { background-color: var(--festi-dark); color: var(--festi-gold); }
+/* Marco de video*/
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    background: #000;
+}
+.video-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+}
 /* Video debajo del contenido */
-.video-full-width { margin-top: 30px; border-radius: 12px; overflow: hidden; }
+.video-full-width { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--festi-dark); border-radius: 12px; overflow: hidden; }
 
 /* Preview de las tarjetas en la lista */
 .video-preview-img {
@@ -498,6 +543,8 @@ body {
     font-weight: bold;
 }
 .pieza-card:hover .play-overlay { opacity: 1; }
+/* #endregion */
+/* #endregion */
 
 /* --- 6. ESTILOS PARA EL PANEL ADMIN (AÑADIDOS SIN DAÑAR LO ANTERIOR) --- */
 .admin-container { padding: 100px 8%; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
@@ -696,5 +743,5 @@ body {
         max-width: 90%;  /* En móviles usa casi todo el ancho disponible */
         font-size: 0.95rem;
     }
-
 }
+

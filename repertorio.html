@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Repertorio Oficial | Festi-Band</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-</head>
-<body class="repertorio-body">
-
-    <nav class="navbar">
-        <div class="logo">FESTI<span>BAND</span></div>
-        <div class="nav-links">
-            <a href="admin.html" id="btn-volver-admin" class="btn-edit" style="display: none;">⚙️ Administrar</a>
-            <button onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
-        </div>
-    </nav>
-
-    <main class="repertorio-container">
-        <header class="repertorio-header">
-            <h1>Repertorio <span class="gold-text">Oficial</span></h1>
-            <div class="search-box">
-                <input type="text" id="search-repertorio" placeholder="🔍 Buscar por obra, autor o instrumento...">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Repertorio | ODV</title>
+        <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    </head>
+    <body class="repertorio-body">
+        <nav class="navbar">
+            <div class="logo">FESTI<span>BAND</span></div>
+            <div class="nav-links">
+                <a href="admin.html" id="btn-volver-admin" class="btn-edit">Editar ⚙️</a>
+                <button onclick="cerrarSesion()" class="btn-logout">Cerrar Sesión</button>
             </div>
-        </header>
+        </nav>
 
-        <div class="repertorio-grid">
-        </div>
-    </main>
-
-    <div id="modal-detalle" class="modal">
-        <div class="modal-content">
-            <span class="close-btn" onclick="cerrarDetalle()">&times;</span>
-            <div id="detalle-dinamico">
+        <main class="repertorio-container">
+            <header class="repertorio-header">
+                <h1>Repertorio <span class="gold-text">ODV</span></h1>
+                <div class="search-box">
+                    <input type="text" id="search-repertorio" placeholder="🔍 Buscar por obra, autor o instrumento...">
                 </div>
+            </header>
+            <div class="repertorio-grid">
+            </div>
+        </main>
+
+        <div id="modal-detalle" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="cerrarDetalle()">&times;</span>
+                <div id="detalle-dinamico">
+                    </div>
+            </div>
         </div>
-    </div>
 
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
-
-<script src="script.js"></script>
-</body>
-
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-storage-compat.js"></script>
+        <script src="script.js"></script>
+    </body>
 </html>
-
