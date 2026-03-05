@@ -120,12 +120,6 @@ function cerrarSesion() {
     window.location.href = "index.html";
 }
 
-function cerrarSesion() {
-    localStorage.removeItem('festiSession');
-    window.location.href = "index.html";
-}
-
-
 // --- 3. PANEL ADMINISTRATIVO ---
 // --- 3. PANEL ADMINISTRATIVO (CON SUBIDA DE PDF) ---
 const formPieza = document.getElementById('form-pieza');
@@ -139,7 +133,7 @@ if (formPieza) {
 
         // Si seleccionaste un archivo, lo subimos a Storage
         if (file) {
-            const storageRef = storage.ref('partituras/' + file.name);
+            const storageRef = storage.ref('partituras/' + Date.now() + "_" + file.name);
             await storageRef.put(file);
             pdfUrl = await storageRef.getDownloadURL();
         }
@@ -245,39 +239,6 @@ if (searchInput) {
     });
 }
 
-// --- 5. MODAL DETALLE ---
-function abrirDetalle(id) {
-    const p = piezasData[id];
-    const display = document.getElementById('detalle-dinamico');
-    display.innerHTML = `
-        <div class="detalle-info-texto">
-            <h2>${p.titulo}</h2>
-            <span class="meta"> Grade ${p.grado} | Autor: ${p.duracion}'</span>
-        </div>
-        <div class="detalle-wrapper">
-            <div class="detalle-info-visual"><img src="${p.imagen}"></div>
-            <div class="detalle-info-texto">
-                <p>${p.descripcion}</p>
-                <a href="${p.pdf}" target="_blank" class="click-score">Click to view score →</a>
-            </div>
-        </div>
-            <div class="video-full-width">
-                <div class="video-wrapper">
-                    <iframe 
-                        src="https://www.youtube.com/embed/${p.youtubeId}?rel=0" 
-                        frameborder="0" 
-                        allowfullscreen>
-                    </iframe>
-                </div>
-            </div>`;
-    document.getElementById('modal-detalle').style.display = "block";
-}
-
-function cerrarDetalle() {
-    document.getElementById('modal-detalle').style.display = "none";
-    document.getElementById('detalle-dinamico').innerHTML = "";
-}
-
 document.addEventListener('DOMContentLoaded', () => {
     // 1. Escuchar cambios en la nube en tiempo real
     db.collection("repertorio").orderBy("fecha", "desc").onSnapshot((snapshot) => {
@@ -307,3 +268,4 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
