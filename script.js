@@ -206,7 +206,7 @@ function escucharRepertorio() {
         
         // Llamamos a las funciones que dibujan en pantalla
         actualizarInterfazRepertorio();
-        actualizarInterfazAdmin();
+        renderAdminList();
     });
 }
 
@@ -268,4 +268,5 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 });
+
 
