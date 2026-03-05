@@ -11,24 +11,36 @@ if (path.includes('repertorio.html') && !currentSession) {
     window.location.href = 'login.html';
 }
 
-// Base de Datos del Repertorio
-// Piezas por defecto para que la web no inicie vacía en GitHub
-const piezasSemilla = {
-    "pieza_1": {
-        titulo: "Example Song",
-        grado: "3",
-        autor: "Composer Name",
-        youtubeId: "dQw4w9WgXcQ",
-        imagen: "https://via.placeholder.com/500x400",
-        descripcion: "Welcome to your repertoire. You can add more from the Admin panel.",
-        pdf: "#"
-    }
+// --- 1. CONFIGURACIÓN DE FIREBASE ---
+const firebaseConfig = {
+    apiKey: "AIzaSyBKVZhJcIKPnixgYD3vQX6zoPg7x80qBeg",
+    authDomain: "festi-band.firebaseapp.com",
+    projectId: "festi-band",
+    storageBucket: "festi-band.firebasestorage.app",
+    messagingSenderId: "727482836910",
+    appId: "1:727482836910:web:a4e20eb6a06e3b2eab0a3f"
 };
 
-let piezasData = JSON.parse(localStorage.getItem('festiPiezas')) || piezasSemilla;
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-if (!localStorage.getItem('festiPiezas')) {
-    localStorage.setItem('festiPiezas', JSON.stringify(piezasData));
+// Ya no usamos localStorage para las piezas, usamos esta variable global
+let piezasData = {};
+
+// --- FUNCIÓN PARA CARGAR DATOS DE LA NUBE ---
+async function cargarDatosNube() {
+    try {
+        const snapshot = await db.collection('piezas').get();
+        piezasData = {}; // Limpiamos
+        snapshot.forEach(doc => {
+            piezasData[doc.id] = doc.data();
+        });
+        // Una vez cargados, refrescamos las listas
+        renderRepertorio();
+        renderAdminList();
+    } catch (error) {
+        console.error("Error cargando nube:", error);
+    }
 }
 
 function abrirDetalle(id) {
@@ -107,28 +119,41 @@ function cerrarSesion() {
 
 
 // --- 3. PANEL ADMINISTRATIVO ---
+// --- 3. PANEL ADMINISTRATIVO (NUBE) ---
 const formPieza = document.getElementById('form-pieza');
 if (formPieza) {
-    formPieza.addEventListener('submit', (e) => {
+    formPieza.addEventListener('submit', async (e) => { // Agregamos 'async'
         e.preventDefault();
         const idExistente = document.getElementById('edit-id').value;
-        const id = idExistente || 'pieza_' + Date.now();
         
-        piezasData[id] = {
+        const datosPieza = {
             titulo: document.getElementById('admin-titulo').value,
             grado: document.getElementById('admin-grado').value,
             autor: document.getElementById('admin-autor').value,
             youtubeId: document.getElementById('admin-yt').value,
             imagen: document.getElementById('admin-img').value || 'https://via.placeholder.com/500x400',
             descripcion: document.getElementById('admin-desc').value,
-            pdf: "#"
+            pdf: "#" // Aquí podrías poner el link al PDF si usas Storage
         };
 
-        localStorage.setItem('festiPiezas', JSON.stringify(piezasData));
-        alert("✅ Cambios guardados.");
-        formPieza.reset();
-        document.getElementById('edit-id').value = "";
-        renderAdminList();
+        try {
+            if (idExistente) {
+                // ACTUALIZAR en Firebase
+                await db.collection('piezas').doc(idExistente).update(datosPieza);
+                alert("✅ Pieza actualizada en la nube.");
+            } else {
+                // CREAR nueva en Firebase
+                await db.collection('piezas').add(datosPieza);
+                alert("✅ Pieza creada en la nube.");
+            }
+            
+            formPieza.reset();
+            document.getElementById('edit-id').value = "";
+            cargarDatosNube(); // Recargamos los datos para ver los cambios
+        } catch (error) {
+            console.error("Error al guardar:", error);
+            alert("❌ Error al conectar con Firebase.");
+        }
     });
 }
 
@@ -137,6 +162,7 @@ function renderAdminList() {
     if (!lista) return;
     lista.innerHTML = '';
     
+    // Ahora recorremos piezasData que viene de la nube
     Object.keys(piezasData).forEach(id => {
         const p = piezasData[id];
         lista.innerHTML += `
@@ -161,11 +187,15 @@ function cargarParaEditar(id) {
     document.getElementById('admin-desc').value = p.descripcion;
 }
 
-function eliminarPieza(id) {
-    if (confirm('¿Eliminar pieza?')) {
-        delete piezasData[id];
-        localStorage.setItem('festiPiezas', JSON.stringify(piezasData));
-        renderAdminList();
+async function eliminarPieza(id) {
+    if (confirm('¿Eliminar de la nube permanentemente?')) {
+        try {
+            await db.collection('piezas').doc(id).delete();
+            alert("🗑️ Eliminado de la nube.");
+            cargarDatosNube();
+        } catch (error) {
+            console.error("Error al eliminar:", error);
+        }
     }
 }
 
@@ -202,14 +232,13 @@ if (searchInput) {
 // --- 5. MODAL DETALLE ---
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Ejecutar renders si los contenedores existen
-    if (document.querySelector('.repertorio-grid')) renderRepertorio();
-    if (document.getElementById('tabla-piezas')) renderAdminList();
+    // 1. IMPORTANTE: Cargar datos desde Firebase al iniciar
+    cargarDatosNube(); 
 
-    // 2. Control Central de Visibilidad Admin
+    // 2. Control de Visibilidad Admin
     const session = localStorage.getItem('festiSession');
     const btnAdmin = document.getElementById('btn-volver-admin');
-    const linkAdmin = document.getElementById('admin-link'); // El link "Admin" del menu
+    const linkAdmin = document.getElementById('admin-link');
 
     if (session === 'admin') {
         if (btnAdmin) btnAdmin.style.display = 'inline-block';
