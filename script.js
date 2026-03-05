@@ -13,19 +13,23 @@ if (window.location.pathname.includes('repertorio.html')) {
 
 // Base de Datos del Repertorio
 // --- 1. CONFIGURACIÓN DE LA NUBE (FIREBASE) ---
+// --- 1. CONFIGURACIÓN DE FIREBASE (Vínculo Real) ---
 const firebaseConfig = {
-    apiKey: "TU_API_KEY",
-    authDomain: "tu-proyecto.firebaseapp.com",
-    projectId: "tu-proyecto",
-    storageBucket: "tu-proyecto.appspot.com",
-    messagingSenderId: "12345678",
-    appId: "1:12345678:web:abcdef"
+    apiKey: "AIzaSyBKVZhJcIKPnixgYD3vQX6zoPg7x80qBeg",
+    authDomain: "festi-band.firebaseapp.com",
+    projectId: "festi-band",
+    storageBucket: "festi-band.firebasestorage.app", // Nota: .app es el nuevo estándar
+    messagingSenderId: "727482836910",
+    appId: "1:727482836910:web:a4e20eb6a06e3b2eab0a3f",
+    measurementId: "G-YYJJVEBHN6"
 };
 
-// Inicializamos Firebase
+// Inicializar los servicios (Formato Compatible)
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 const storage = firebase.storage();
+
+// El resto de tus funciones (guardarPieza, eliminarPieza, etc.) siguen abajo...
 
 // Esta variable ahora se llenará desde la nube
 let piezasData = {};
@@ -306,4 +310,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 });
+
 
