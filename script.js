@@ -12,26 +12,23 @@ if (window.location.pathname.includes('repertorio.html')) {
 }
 
 // Base de Datos del Repertorio
-let piezasData = JSON.parse(localStorage.getItem('festiPiezas')) || {
-    "himno": {
-        titulo: "Himno Festi-Band",
-        grado: "Grade 4",
-        duracion: "5:30",
-        descripcion: "El Himno Festi-Band es una obra emblemática diseñada para ensambles de vientos. Su estructura combina fanfarrias heroicas con interludios líricos que representan el crecimiento de los jóvenes músicos dominicanos.",
-        imagen: "https://images.unsplash.com/photo-1511192336575-5a79af67a629?q=80",
-        pdf: "pdfs/himno.pdf",
-        youtubeId: "dQw4w9WgXcQ"
-    },
-    "merengue": {
-        titulo: "Merengue No. 1",
-        grado: "Grade 6",
-        duracion: "4:15",
-        descripcion: "Esta pieza es una celebración rítmica que desafía la técnica de la percusión y los metales. Inspirada en las raíces del merengue típico, pero elevada a un lenguaje sinfónico moderno.",
-        imagen: "https://images.unsplash.com/photo-1514320298324-a4a27a19baa9?q=80",
-        pdf: "pdfs/merengue.pdf",
-        youtubeId: "dQw4w9WgXcQ"
-    }
+// --- 1. CONFIGURACIÓN DE LA NUBE (FIREBASE) ---
+const firebaseConfig = {
+    apiKey: "TU_API_KEY",
+    authDomain: "tu-proyecto.firebaseapp.com",
+    projectId: "tu-proyecto",
+    storageBucket: "tu-proyecto.appspot.com",
+    messagingSenderId: "12345678",
+    appId: "1:12345678:web:abcdef"
 };
+
+// Inicializamos Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+const storage = firebase.storage();
+
+// Esta variable ahora se llenará desde la nube
+let piezasData = {};
 
 function abrirDetalle(id) {
     const p = piezasData[id];
@@ -123,28 +120,43 @@ function cerrarSesion() {
 
 
 // --- 3. PANEL ADMINISTRATIVO ---
+// --- 3. PANEL ADMINISTRATIVO (CON SUBIDA DE PDF) ---
 const formPieza = document.getElementById('form-pieza');
 if (formPieza) {
-    formPieza.addEventListener('submit', (e) => {
+    formPieza.addEventListener('submit', async (e) => { // Agregamos async
         e.preventDefault();
         const idExistente = document.getElementById('edit-id').value;
-        const id = idExistente || 'pieza_' + Date.now();
+        const file = document.getElementById('pdf-file').files[0]; // El input file que creamos
         
-        piezasData[id] = {
+        let pdfUrl = "#";
+
+        // Si seleccionaste un archivo, lo subimos a Storage
+        if (file) {
+            const storageRef = storage.ref('partituras/' + file.name);
+            await storageRef.put(file);
+            pdfUrl = await storageRef.getDownloadURL();
+        }
+
+        const datosPieza = {
             titulo: document.getElementById('admin-titulo').value,
             grado: document.getElementById('admin-grado').value,
             duracion: document.getElementById('admin-duracion').value,
             youtubeId: document.getElementById('admin-yt').value,
             imagen: document.getElementById('admin-img').value || 'https://via.placeholder.com/500x400',
             descripcion: document.getElementById('admin-desc').value,
-            pdf: "#"
+            pdf: pdfUrl,
+            fecha: new Date()
         };
 
-        localStorage.setItem('festiPiezas', JSON.stringify(piezasData));
-        alert("✅ Cambios guardados.");
+        if (idExistente) {
+            await db.collection("repertorio").doc(idExistente).update(datosPieza);
+        } else {
+            await db.collection("repertorio").add(datosPieza);
+        }
+
+        alert("✅ Cambios guardados en la nube.");
         formPieza.reset();
         document.getElementById('edit-id').value = "";
-        renderAdminList();
     });
 }
 
@@ -176,16 +188,28 @@ function cargarParaEditar(id) {
     document.getElementById('admin-desc').value = p.descripcion;
 }
 
-function eliminarPieza(id) {
-    if (confirm('¿Eliminar pieza?')) {
-        delete piezasData[id];
-        localStorage.setItem('festiPiezas', JSON.stringify(piezasData));
-        renderAdminList();
+async function eliminarPieza(id) {
+    if (confirm('¿Eliminar esta pieza de la nube?')) {
+        await db.collection("repertorio").doc(id).delete();
+        alert("Eliminado.");
     }
 }
 
 // --- 4. REPERTORIO Y BUSCADOR ---
-function renderRepertorio() {
+function escucharRepertorio() {
+    db.collection("repertorio").orderBy("fecha", "desc").onSnapshot((snapshot) => {
+        piezasData = {}; // Limpiamos localmente
+        snapshot.forEach(doc => {
+            piezasData[doc.id] = doc.data();
+        });
+        
+        // Llamamos a las funciones que dibujan en pantalla
+        actualizarInterfazRepertorio();
+        actualizarInterfazAdmin();
+    });
+}
+
+function actualizarInterfazRepertorio() {
     const grid = document.querySelector('.repertorio-grid');
     if (!grid) return;
     grid.innerHTML = '';
@@ -230,12 +254,16 @@ function abrirDetalle(id) {
                 <a href="${p.pdf}" target="_blank" class="click-score">Click to view score →</a>
             </div>
         </div>
-        <div class="video-full-width">
-            <div class="video-wrapper">
-                // Cambia la línea del iframe por esta:
-                <iframe src="https://www.youtube.com/embed/${p.youtubeId}?autoplay=1&rel=0&origin=${window.location.origin}" ...
-            </div>
-        </div>`;
+        // Dentro de abrirDetalle(id)
+            <div class="video-full-width">
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/${p.youtubeId}?rel=0" 
+                        frameborder="0" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>`;
     document.getElementById('modal-detalle').style.display = "block";
 }
 
@@ -245,19 +273,25 @@ function cerrarDetalle() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    renderAdminList();
-    renderRepertorio();
-});
+    // Escuchar cambios en la nube en tiempo real
+    db.collection("repertorio").orderBy("fecha", "desc").onSnapshot((snapshot) => {
+        piezasData = {}; // Limpiamos la lista local
+        snapshot.forEach(doc => {
+            piezasData[doc.id] = doc.data(); // Llenamos con lo que hay en internet
+        });
+        
+        // Dibujamos todo de nuevo con los datos nuevos
+        renderAdminList();
+        renderRepertorio();
+    });
 
-document.addEventListener('DOMContentLoaded', () => {
-    renderRepertorio();
-    renderAdminList();
-
-    // Lógica para mostrar el botón de volver al panel si eres admin
+    // Mostrar botón admin si la sesión está activa
     const btnAdmin = document.getElementById('btn-volver-admin');
+    const linkAdmin = document.getElementById('admin-link');
     const session = localStorage.getItem('festiSession');
     
-    if (btnAdmin && session === 'admin') {
-        btnAdmin.style.display = 'inline-block';
+    if (session === 'admin') {
+        if (btnAdmin) btnAdmin.style.display = 'inline-block';
+        if (linkAdmin) linkAdmin.style.display = 'inline-block';
     }
 });
