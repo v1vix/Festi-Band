@@ -45,16 +45,19 @@ async function cargarDatosNube() {
 
 function abrirDetalle(id) {
     const p = piezasData[id];
+    const modal = document.getElementById('modal-detalle');
     const display = document.getElementById('detalle-dinamico');
+
+    modal.style.background = `linear-gradient(rgba(27, 55, 93, 0.22), rgba(27, 55, 93, 0.46)), url('${p.imagen}') center/cover no-repeat`;
 
     display.innerHTML = `
         <div class="detalle-info-texto">
             <h2>${p.titulo}</h2>
-            <span class="meta"> Grade ${p.grado} | Autor: ${p.autor}'</span>
+            <span class="meta"> Grade ${p.grado} | ${p.autor}</span>
         </div>
         <div class="detalle-wrapper">
             <div class="detalle-info-visual">
-                <img src="${p.imagen}" alt="${p.titulo}">
+                <img src="${p.imagen}" alt="${p.titulo}" style="object-fit: cover; background: #000;">
             </div>
             <div class="detalle-info-texto">
                 <p>${p.descripcion}</p>
@@ -209,7 +212,7 @@ function renderRepertorio() {
         grid.innerHTML += `
             <div class="pieza-card" onclick="abrirDetalle('${id}')">
                 <div class="video-preview-img" style="background-image: url('${p.imagen}');">
-                    <div class="play-overlay">▶ Ver Detalles</div>
+                    <div class="play-overlay">Ver Detalles</div>
                 </div>
                 <div class="pieza-content">
                     <h3>${p.titulo}</h3>

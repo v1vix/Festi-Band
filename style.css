@@ -14,7 +14,6 @@ body {
     color: var(--festi-dark);
 }
 
-
 /* --- BARRA DE NAVEGACION HOME --- */
 /* #region */
 .navbar {
@@ -37,7 +36,11 @@ body {
     }
     /* Ajuste para que el logo no pegue con los links en móvil */
     .navbar {
-        align-items: center; 
+    align-items: center; 
+    position: fixed;
+    top: 0;
+    width: -webkit-fill-available;
+    z-index: 1;
     }
     .nav-links {
         display: flex;
@@ -104,10 +107,11 @@ body {
 .btn-primary { 
     background: var(--festi-gold); 
     color: var(--festi-dark); 
-    padding: 12px 25px; 
+    padding: 15px 50px; 
     text-decoration: none; 
     font-weight: 700; 
-    border-radius: 5px; 
+    font-size: 1rem;
+    border-radius: 10px; 
     border: none; 
 }
 .btn-primary:hover { background: #e2c07d; 
@@ -205,6 +209,26 @@ body {
 .glass-login-card:hover .login-logo img {
     transform: scale(1.03);
 }
+/*Boton de entrar*/
+.btn-glass {
+    width: 95%;
+    padding: 12px;
+    background: #c5a059;
+    color: #1b365d;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.btn-glass:hover {
+    background: #e2c07d;
+    color: #527db9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
+}
 /*Volver al inicio*/
 .back-link {
     display: block;
@@ -228,6 +252,9 @@ body {
 
 /* --- ADMIN SECCION ---*/
 /* #region */
+.admin-body{
+    background-color: whitesmoke;
+}
 .input-grou2 input {
     width: 85%;
     padding: 12px 15px;
@@ -251,7 +278,7 @@ body {
 }
 
 .input-port input{
-    width: 85%;
+    width: -webkit-fill-available;
     padding: 12px 15px;
     margin-bottom: 15px;
     background: rgba(255, 255, 255, 0.05);
@@ -273,7 +300,7 @@ body {
 }
 
 .input-desc textarea {
-    width: 85%;
+    width: -webkit-fill-available;
     padding: 12px 15px;
     margin-bottom: 15px;
     background: rgba(255, 255, 255, 0.05); /* Mantén el fondo que usas */
@@ -297,24 +324,20 @@ body {
     border-color: #c5a059;
     background: rgba(255, 255, 255, 0.1);
 }
-/*Boton de guardar*/
-.btn-glass {
-    width: 95%;
-    padding: 12px;
-    background: #c5a059;
-    color: #1b365d;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: 0.3s;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.btn-primary2 { 
+    background: var(--festi-gold); 
+    color: var(--festi-dark); 
+    padding: 15px 50px; 
+    text-decoration: none; 
+    font-weight: 700; 
+    font-size: 1rem;
+    border-radius: 10px; 
+    border: none; 
+    width: 100%;
 }
-.btn-glass:hover {
-    background: #e2c07d;
-    color: #527db9;
-    transform: translateY(-2px);
+.btn-primary2:hover { background: #e2c07d; 
+    color: #527db9; 
+    transform: translateY(-2px); 
     box-shadow: 0 5px 15px rgba(197, 160, 89, 0.4);
 }
 /* #endregion */
@@ -408,13 +431,13 @@ body {
 .pieza-content h3 { 
     margin: 0 0 10px 0; 
     color: var(--festi-blue); 
-    font-size: 1.4rem; /* Un poco más grande */
+    font-size: 1.6rem; /* Un poco más grande */
     font-weight: 700;
 }
 .pieza-content p { 
     font-size: 1rem; /* Subimos de 0.9 a 1rem */
-    color: #555; 
-    font-weight: 500;
+    color: var(--festi-gold); 
+    font-weight: 700;
     line-height: 1.4; 
     height: auto; /* Quitamos el height fijo para que no se corte el texto */
     margin-bottom: 10px;
@@ -480,13 +503,14 @@ body {
 }
 /* Estilos imagen en sí */
 .detalle-wrapper .detalle-info-visual img {
-    width: 100%; 
-    max-height: 300px; /* Cambiamos height fijo por max-height */
-    object-fit: contain; /* CAMBIO: 'contain' evita que se corte el texto de la imagen */
-    background-color: #f0f0f0; /* Un fondo neutro por si la imagen es pequeña */
-    border-radius: 8px; 
+    width: 100%;
+    max-width: 400px;
+    max-height: 235px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+    border-radius: 8px;
     border: 2px solid #d4af37;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.3); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 /* Ajuste para pantallas pequeñas (móviles) */
 @media (max-width: 600px) {
@@ -500,20 +524,26 @@ body {
     min-width: 300px; 
 }
 .detalle-info-texto h2 { 
-    font-size: 2.6rem; 
-    color: var(--festi-dark); 
+    font-size: 3.3rem;
+    color: var(--festi-dark);
     margin-bottom: 5px;
-    margin-top: 10px; 
+    text-align: center;
+    margin-top: 10px;
 }
-.detalle-info-texto .meta { color: var(--festi-gold); 
-    font-weight: bold; 
-    margin-bottom: 20px; 
-    display: block; 
+.detalle-info-texto .meta {
+    color: var(--festi-gold);
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 36px;
+    display: block;
 }
 .detalle-info-texto p { 
-    line-height: 1.7; 
-    text-align: justify; 
-    color: var(--festi-dark); 
+    line-height: 1.7;
+    text-align: justify;
+    padding-right: 15px;
+    color: var(--festi-dark);
+    margin-top: auto;
 }
 .click-score { 
     display: inline-block; 
@@ -543,7 +573,12 @@ body {
     top: 0; left: 0; width: 100%; height: 100%;
 }
 /* Video debajo del contenido */
-.video-full-width { margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--festi-dark); border-radius: 12px; overflow: hidden; }
+.video-full-width { 
+    margin-top: 25px;
+    border-top: 1px solid var(--festi-dark);
+    border-radius: 12px;
+    overflow: hidden;
+}
 
 /* Preview de las tarjetas en la lista */
 .video-preview-img {
@@ -561,7 +596,14 @@ body {
 /* #endregion */
 
 /* --- 6. ESTILOS PARA EL PANEL ADMIN (AÑADIDOS SIN DAÑAR LO ANTERIOR) --- */
-.admin-container { padding: 100px 8%; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.admin-container { 
+    padding: 100px 8%; 
+    display: grid; 
+    grid-template-columns: 1fr 1fr; 
+    gap: 40px; 
+    background:  linear-gradient(135deg, #4676a917 0%, #c5a0590a 100%) rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(15px);
+}
 .admin-card { background: rgb(255, 255, 255); padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
 .input-group { display: flex; gap: 10px; margin-bottom: 10px; }
 .input-grou2
